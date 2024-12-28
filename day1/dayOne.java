@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class dayOne {
@@ -26,13 +27,19 @@ public class dayOne {
             Collections.sort(cols1);
             Collections.sort(cols2);
 
+            HashMap<Integer, Integer> freq = new HashMap<>();
             int sum = 0;
+            int sumFrequency = 0;
             for (int i = 0; i < cols1.size(); i++) {
                 int l = cols1.get(i);
                 int r = cols2.get(i);
+                int lFrequency = Collections.frequency(cols2, l);
+                freq.put(l, lFrequency);
+                sumFrequency += (lFrequency * l);
                 sum += Math.abs(l - r);
             }
             System.out.println(sum);
+            System.out.println(sumFrequency);
         } catch (IOException e) {
             e.printStackTrace();
         }
