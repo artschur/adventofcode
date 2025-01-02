@@ -73,9 +73,27 @@ resultRowsCols = 0
 for i in range(0, len(readMatrix())):
     resultRowsCols += (readRow(i) + readColumn(i))
 
-print(diagStrings)
-print(antiDiagStrings)
 resultAntidiagonals = int(antiDiagStrings.count('XMAS') + antiDiagStrings.count('SAMX'))
 resultDiags = int(diagStrings.count('XMAS') + diagStrings.count('SAMX'))
 
 print((resultRowsCols + resultAntidiagonals + resultDiags))
+
+# M S
+#  A
+# M S
+#
+# S S
+#  A
+# M M
+
+def getXmas():
+    countXmas = 0
+    for row in range(1, len(matrix) - 1 ):
+        for col in range(1, len(matrix[0]) - 1):
+            if matrix[row][col] == 'A':
+                corners = [matrix[row - 1][col - 1], matrix[row - 1][col + 1], matrix[row + 1][col + 1], matrix[row + 1][col - 1]]
+                if "".join(corners) in ['MMSS', 'MSSM', 'SSMM', 'SMMS']:
+                    countXmas += 1
+    return countXmas
+
+print('xmas', getXmas())
